@@ -1,0 +1,1 @@
+Meghova is an AI-based weather forecasting system that improves existing weather predictions by analyzing NWP and meteorological data, classifying weather regimes, and providing more accurate and localized weather insights.
