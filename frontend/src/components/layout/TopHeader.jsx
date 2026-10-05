@@ -1,0 +1,3 @@
+import { Activity, CloudRain } from "lucide-react";
+import { useEffect,useState } from "react"; import {getHealth} from "../../services/Api";
+export default function TopHeader(){const [ready,setReady]=useState(false);useEffect(()=>{getHealth().then(x=>setReady(x.model_ready)).catch(()=>setReady(false))},[]);return <header className="top-header"><div className="header-brand"><div className="brand-cloud"><CloudRain size={27}/></div><div><h1>MEGHOVA</h1><p>AI Rainfall Intelligence</p></div></div><div className={`system-status ${ready?"online":"offline"}`}><Activity size={16}/><span>{ready?"ML SYSTEM ONLINE":"BACKEND OFFLINE"}</span></div></header>}

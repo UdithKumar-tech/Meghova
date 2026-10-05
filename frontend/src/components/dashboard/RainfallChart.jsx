@@ -1,0 +1,5 @@
+import { useEffect, useState } from "react";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import Card from "../common/Card";
+import { getMapForecast } from "../../services/Api";
+export default function RainfallChart(){ const [data,setData]=useState([]); useEffect(()=>{getMapForecast().then(d=>setData((d.locations||[]).map((x,i)=>({name:x.date?new Date(x.date).toLocaleDateString("en-IN",{day:"2-digit",month:"short"}):`Point ${i+1}`,nwp:+x.nwp_rainfall.toFixed(2),corrected:+x.corrected_rainfall.toFixed(2)})))).catch(()=>{})},[]); return <Card title="Forecast Comparison"><div className="chart-container"><ResponsiveContainer width="100%" height="100%"><LineChart data={data}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="name"/><YAxis/><Tooltip/><Legend/><Line type="monotone" dataKey="nwp" name="NWP" stroke="#1976D2" strokeWidth={2}/><Line type="monotone" dataKey="corrected" name="MEGHOVA" stroke="#10B981" strokeWidth={2}/></LineChart></ResponsiveContainer></div></Card> }
